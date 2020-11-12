@@ -5,7 +5,9 @@ import java.util.Random;
 
 public class Pitcher {
 
-    public String selectNumber() {
+    private String number;
+
+    public void selectNumber() {
         StringBuffer sb = new StringBuffer();
         List<Integer> initNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
@@ -18,7 +20,10 @@ public class Pitcher {
             bound--;
         }
 
-        return sb.toString();
+        this.number = sb.toString();
     }
 
+    public String getNumber() {
+        return number;
+    }
 }
