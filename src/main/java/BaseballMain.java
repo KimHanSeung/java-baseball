@@ -1,27 +1,47 @@
 public class BaseballMain {
+
+    private Pitcher pitcher = new Pitcher();
+    private Batter batter = new Batter();
+    private Catcher catcher = new Catcher();
+    private Umpire umpire = new Umpire();
+
     public static void main(String[] args) {
         new BaseballMain().playBall();
     }
 
+    private int count = 0;
+
+    public void baseBallInit(){
+        catcher.setBallAndStrikeZero();
+        count = 0;
+    }
+
     public void playBall(){
 
-        Pitcher pitcher = new Pitcher();
-        pitcher.selectNumber();
+        while(true){
 
-        Batter batter = new Batter();
-
-        boolean isPlay = true;
-        while(isPlay){
+            if(count == 0){
+                pitcher.selectNumber();
+            }
+            count++;
 
             batter.inputNumber();
+            catcher.setPitcherNumber(pitcher.getNumber());
+            catcher.setBatterNumber(batter.getNumber());
 
-            String pStr = pitcher.getNumber();
-            System.out.println(pStr);
+            catcher.equalsBaseBall();
 
-            String bStr = batter.getNumber();
-            System.out.println(bStr);
+            if(catcher.isThreeStrike()){
 
-            isPlay = false;
+                if(umpire.isGameEnd()){
+                    break;
+                }
+
+                baseBallInit();
+                continue;
+            }
+
+            catcher.printBaseBall();
 
         }
 
